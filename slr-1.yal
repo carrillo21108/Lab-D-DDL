@@ -10,8 +10,9 @@ let id = letter(letter|digit)*
 
 rule tokens = 
     ws
-  | id        { return ID }               (* Cambie por una acción válida, que devuelva el token *)
-  | '+'       { return PLUS }
+  | id        {x = 'hola'
+print(x)}               (* Cambie por una acción válida, que devuelva el token *)
+  | '+'       {return PLUS}
   | '*'       { return TIMES }
   | '('       { return LPAREN }
   | ')'       { return RPAREN }

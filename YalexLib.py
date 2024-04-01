@@ -32,15 +32,15 @@ class YalexRecognizer:
     equal = "="
     
     string = f"[{quotes}][{letter}{digit}{especial_chars}{brackets}{quotes}{curly_brackets}{blank_space}{parens}{kleene}]+[{quotes}]"
-    char = f"[{quotes}][{letter}{digit}]+[{quotes}]"
+    # char = f"[{quotes}][{letter}{digit}]+[{quotes}]"
     
     union = "[\"|\"]"
-    rule_return = f"[{open_curly_bracket}]{ws}return{ws}[{letter}]+{ws}[{close_curly_bracket}]"
+    action = f"[{open_curly_bracket}][{allLetter}{digit}{delim_regex}{especial_chars}{parens}{kleene}{brackets}{quotes}]*[{close_curly_bracket}]"
 
     
     comment_regex = f"\(\*[{allLetter}{digit}{blank_space}{especial_chars}{brackets}]*\*\)"
     definition_regex = f"{let}{ws}{_id}{ws}{equal}{ws}[{letter}{digit}{especial_chars}{brackets}{quotes}{backslash}{blank_space}{parens}{kleene}]+"
-    rule_regex = f"{rule}{ws}{tokens}{ws}{equal}{ws}[{allLetter}{digit}{delim_regex}{especial_chars}{parens}{kleene}{brackets}{curly_brackets}{quotes}]+[{close_curly_bracket}]"
+    rule_regex = f"{rule}{ws}{_id}{ws}{equal}{ws}[{allLetter}{digit}{delim_regex}{especial_chars}{parens}{kleene}{brackets}{curly_brackets}{quotes}]+[{close_curly_bracket}]"
     
     def __init__(self):
         regex = [
@@ -55,8 +55,7 @@ class YalexRecognizer:
             YalexRecognizer.tokens,             #8
             YalexRecognizer.string,             #9
             YalexRecognizer.union,              #10
-            YalexRecognizer.rule_return,        #11
-            YalexRecognizer.char                #12
+            YalexRecognizer.action,             #11
             ]               
         self.afds = []
         for item in regex:
@@ -221,7 +220,7 @@ class YalexRecognizer:
                     # else:
                     #     print("NO ACEPTADO por " + str(i))
         
-                if longer[0]==12:
+                if longer[0]==9:
                     new_content+=longer[2]
                     first = longer[1]
                 

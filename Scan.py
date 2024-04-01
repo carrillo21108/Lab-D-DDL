@@ -33,6 +33,24 @@ def segmentRecognize(afd,i,content):
                 return (False,i,"","")
 
         i += 1  # Incrementa la posicion para el proximo caracter
+        
+def genericFunction(content):
+    local_namespace = {}
+    codigo_funcion = f'def tempFunction():\n'
+    for linea in content.split('\n'):
+        codigo_funcion += f'    {linea}\n'
+    codigo_funcion += 'resultado = tempFunction()'
+    
+    try:
+        # Ejecuta la definicion de la funcion y luego la llama
+        exec(codigo_funcion, globals(), local_namespace)
+
+        # Devuelve el resultado de la funcion
+        return local_namespace['resultado']
+        
+    except Exception as e:
+        print(f"Error al ejecutar el codigo: {e}")
+        return None
             
 def tokensRecognize(afd,txtContent):
     # Inicializa la posicion
@@ -43,7 +61,9 @@ def tokensRecognize(afd,txtContent):
         if res[0]:
             print("ACEPTADO")
             print(res[2])
-            print(res[3])
+            resultado = genericFunction(res[3][1:-1])
+            resultado = resultado if resultado!=None else ""
+            print(resultado)
         else:
             message = f"ERROR al reconocer archivo txt en caracter no. {res[1]}: "
                 
