@@ -316,11 +316,13 @@ def createLexerAFD(item,rule_tokens):
     #Construccion AFD
     afd = ast_to_afdd(RegexLib.regexAlphabet(postfix),ast_root)
     
-    acceptStates = sorted(list(afd.accept), key=lambda x: x.acceptPos)
+    #Listado de valores pos de # unicos en orden ascendente
+    uniquePos = sorted(list(set(state.acceptPos for state in afd.accept)))
     
     #Seteo de la accion correspondiente a cada estado de aceptacion del LexerAFD
-    for i in range(0,len(acceptStates)):
-        acceptStates[i].action = list(rule_tokens.values())[i]
+    #Se considera que accion y # pos se encuentran en el mismo indice
+    for state in afd.accept:
+        state.action = list(rule_tokens.values())[uniquePos.index(state.acceptPos)]
         
     
     return afd

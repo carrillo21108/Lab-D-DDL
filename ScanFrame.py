@@ -4,7 +4,7 @@ import AfLib
 
 if __name__ == "__main__":
 
-    res = Lex.generateLexer('slr-1.yal')
+    res = Lex.generateLexer('slr-3.yal')
 
     if res:
 
