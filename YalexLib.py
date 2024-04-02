@@ -31,7 +31,7 @@ class YalexRecognizer:
     tokens = "tokens"
     equal = "="
     
-    string = f"[{quotes}][{letter}{digit}{especial_chars}{brackets}{quotes}{curly_brackets}{blank_space}{parens}{kleene}]+[{quotes}]"
+    string = f"[{quotes}][{letter}{digit}{especial_chars}{brackets}{curly_brackets}{blank_space}{parens}{kleene}]+[{quotes}]"
     # char = f"[{quotes}][{letter}{digit}]+[{quotes}]"
     
     union = "[\"|\"]"

@@ -36,9 +36,14 @@ def segmentRecognize(afd,i,content):
         
 def genericFunction(content):
     local_namespace = {}
+
     codigo_funcion = f'def tempFunction():\n'
-    for linea in content.split('\n'):
-        codigo_funcion += f'    {linea}\n'
+    if len(content)>0:
+        for linea in content.split('\n'):
+            codigo_funcion += f'    {linea}\n'
+    else:
+        codigo_funcion += f'    return None\n'
+        
     codigo_funcion += 'resultado = tempFunction()'
     
     try:

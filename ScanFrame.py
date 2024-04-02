@@ -4,7 +4,7 @@ import AfLib
 
 if __name__ == "__main__":
 
-    res = ScanGenerator.generateLexer('slr-1.yal')
+    res = ScanGenerator.generateLexer('slr-2.yal')
 
     if res:
 
@@ -47,9 +47,14 @@ def segmentRecognize(afd,i,content):
         
 def genericFunction(content):
     local_namespace = {}
+
     codigo_funcion = f'def tempFunction():\\n'
-    for linea in content.split('\\n'):
-        codigo_funcion += f'    {linea}\\n'
+    if len(content)>0:
+        for linea in content.split('\\n'):
+            codigo_funcion += f'    {linea}\\n'
+    else:
+        codigo_funcion += f'    return None\\n'
+        
     codigo_funcion += 'resultado = tempFunction()'
     
     try:
