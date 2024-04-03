@@ -19,12 +19,14 @@ def generateLexer(file_path):
         yalexContent = file.read()  # Leer todo el contenido del archivo
     
     if yalexRecognizer.yalexRecognize(yalexContent):
-        # print(yalexRecognizer.get_comments())
-        # print('\n')
-        # print(yalexRecognizer.get_definitions())
-        # print('\n')
-        # print(yalexRecognizer.get_rule_tokens())
-        # print('\n')
+        print(yalexRecognizer.get_comments())
+        print('\n')
+        print(yalexRecognizer.get_definitions())
+        print('\n')
+        print(yalexRecognizer.get_rule_tokens())
+        print('\n')
+        print(yalexRecognizer.get_actions())
+        print('\n')
     
 
         for key in yalexRecognizer.get_rule_tokens():
@@ -93,6 +95,6 @@ def generateLexer(file_path):
             # Serializamos el objeto y lo guardamos en el archivo
             pickle.dump(afd, archivo_salida)
             
-        return True
+        return yalexRecognizer
     else:
-        return False
+        return None

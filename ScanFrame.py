@@ -4,13 +4,15 @@ import AfLib
 
 if __name__ == "__main__":
 
-    res = ScanGenerator.generateLexer('slr-2.yal')
+    res = ScanGenerator.generateLexer('slr-1.yal')
 
     if res:
-
+        header = res.get_actions()[0][1:-1] if len(res.get_actions())>0 else ""
+        
         # Definir el contenido del nuevo archivo Python Scan.py
-        contenido = """# Este es un archivo Python generado automaticamente
-import pickle 
+        contenido = f"""# Este es un archivo Python generado automaticamente
+import pickle
+{header}
             
 def step_simulate_AFD(afd,c,lookAhead):
     res = afd.step_simulation(c, lookAhead)
@@ -46,12 +48,12 @@ def segmentRecognize(afd,i,content):
         i += 1  # Incrementa la posicion para el proximo caracter
         
 def genericFunction(content):
-    local_namespace = {}
+    local_namespace = {{}}
 
     codigo_funcion = f'def tempFunction():\\n'
     if len(content)>0:
         for linea in content.split('\\n'):
-            codigo_funcion += f'    {linea}\\n'
+            codigo_funcion += f'    {{linea}}\\n'
     else:
         codigo_funcion += f'    return None\\n'
         
@@ -65,7 +67,7 @@ def genericFunction(content):
         return local_namespace['resultado']
         
     except Exception as e:
-        print(f"Error al ejecutar el codigo: {e}")
+        print(f"Error al ejecutar el codigo: {{e}}")
         return None
             
 def tokensRecognize(afd,txtContent):
@@ -81,7 +83,7 @@ def tokensRecognize(afd,txtContent):
             resultado = resultado if resultado!=None else ""
             print(resultado)
         else:
-            message = f"ERROR al reconocer archivo txt en caracter no. {res[1]}: "
+            message = f"ERROR al reconocer archivo txt en caracter no. {{res[1]}}: "
                 
             return False
 

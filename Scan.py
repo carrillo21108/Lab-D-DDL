@@ -1,4 +1,6 @@
 # Este es un archivo Python generado automaticamente
+PLUS = "PLUS"
+TIMES = "TIMES"
 import pickle 
             
 def step_simulate_AFD(afd,c,lookAhead):

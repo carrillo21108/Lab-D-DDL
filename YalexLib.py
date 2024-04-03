@@ -64,6 +64,7 @@ class YalexRecognizer:
         self.comments = []
         self.definitions = {}
         self.rule_tokens = {}
+        self.actions = []
 
     def step_simulate_AFD(self,afd_pos,c,lookAhead):
         afd = self.afds[afd_pos]
@@ -251,7 +252,7 @@ class YalexRecognizer:
         while first<=len(yalexContent):
             #Longer sera utilizado para encontrar la primera aceptacion encontrada mas larga
             longer = [-1,len(yalexContent)+1,""] #Pos del AFD, Ultima posicion de lookAhead, contenido aceptado
-            afdPos = [0,1,2,3]
+            afdPos = [0,1,2,3,11]
             longer_error = 0
 
             #Revisar entre los AFDs definidos en el yalexRecognizer
@@ -278,6 +279,8 @@ class YalexRecognizer:
                 self.ruleRecognize(longer[2])
             elif longer[0]==3: #ws
                 pass
+            elif longer[0]==11: #action
+                self.actions.append(longer[2])
             elif longer[0]==-1 and first!=len(yalexContent): #Error
                 message = f"ERROR al reconocer archivo Yalex en caracter no. {longer_error}: "
                 posicion = ' '*len(message)
@@ -307,3 +310,6 @@ class YalexRecognizer:
     
     def get_rule_tokens(self):
         return self.rule_tokens
+    
+    def get_actions(self):
+        return self.actions
