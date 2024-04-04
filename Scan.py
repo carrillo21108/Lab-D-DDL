@@ -77,7 +77,7 @@ def tokensRecognize(afd,txtContent):
             resultado = resultado if resultado!=None else ""
             print(resultado)
         elif not res[0] and first!=len(txtContent):
-            message = f"-- ERROR -- al reconocer archivo txt en caracter no. {res[1]+1}: "
+            message = f"-- ERROR LEXICO -- al reconocer archivo txt en caracter no. {res[1]+1}: "
             posicion = ' '*len(message)
             for item in txtContent[first:res[1]]:
                 if item=='\n':
@@ -96,14 +96,14 @@ def tokensRecognize(afd,txtContent):
 
         first = nextFirst
 
-if __name__ == "__main__":
-    #Lectura del objeto pkl
-    with open('afd.pkl', 'rb') as archivo_entrada:
-        afd = pickle.load(archivo_entrada)
+#Lectura del objeto pkl
+with open('afd.pkl', 'rb') as archivo_entrada:
+    afd = pickle.load(archivo_entrada)
             
-    #Lectura del documento txt
-    with open('texto.txt', 'r', encoding='utf-8') as file:
-        txtContent = file.read()  # Leer todo el contenido del archivo
+#Lectura del documento txt
+with open('texto.txt', 'r', encoding='utf-8') as file:
+    txtContent = file.read()  # Leer todo el contenido del archivo
         
-    tokensRecognize(afd,txtContent)
-    print("Finalizacion")
+tokensRecognize(afd,txtContent)
+print("Finalizacion")
+print("Hola mundo")

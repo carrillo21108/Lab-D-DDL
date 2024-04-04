@@ -20,4 +20,5 @@ rule tokens =
   | '('       { return LPAREN }
   | ')'       { return RPAREN }
 
-{print("Finalizacion")}
+{print("Finalizacion")
+print("Hola mundo")}

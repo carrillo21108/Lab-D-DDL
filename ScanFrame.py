@@ -107,17 +107,16 @@ def tokensRecognize(afd,txtContent):
 
         first = nextFirst
 
-if __name__ == "__main__":
-    #Lectura del objeto pkl
-    with open('afd.pkl', 'rb') as archivo_entrada:
-        afd = pickle.load(archivo_entrada)
+#Lectura del objeto pkl
+with open('afd.pkl', 'rb') as archivo_entrada:
+    afd = pickle.load(archivo_entrada)
             
-    #Lectura del documento txt
-    with open('texto.txt', 'r', encoding='utf-8') as file:
-        txtContent = file.read()  # Leer todo el contenido del archivo
+#Lectura del documento txt
+with open('texto.txt', 'r', encoding='utf-8') as file:
+    txtContent = file.read()  # Leer todo el contenido del archivo
         
-    tokensRecognize(afd,txtContent)
-    {trailer}
+tokensRecognize(afd,txtContent)
+{trailer}
 """
 
 
