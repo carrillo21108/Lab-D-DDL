@@ -71,15 +71,26 @@ def tokensRecognize(afd,txtContent):
         nextFirst = res[1]
         
         if res[0]:
-            print("ACEPTADO")
+            print(">> ACEPTADO <<")
             print(res[2])
             resultado = genericFunction(res[3][1:-1])
             resultado = resultado if resultado!=None else ""
             print(resultado)
         elif not res[0] and first!=len(txtContent):
-            message = f"ERROR al reconocer archivo txt en caracter no. {res[1]+1}: "
+            message = f"-- ERROR -- al reconocer archivo txt en caracter no. {res[1]+1}: "
+            posicion = ' '*len(message)
+            for item in txtContent[first:res[1]]:
+                if item=='\n':
+                    posicion+='\n'
+                elif item=='\t':
+                    posicion+='\t'
+                else:
+                    posicion+=' '
+                    
             nextFirst+=1
             print(message+txtContent[first:nextFirst])
+            print(posicion + '^')
+            
         else:
             nextFirst+=1
 
