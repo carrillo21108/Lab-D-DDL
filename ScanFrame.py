@@ -1,3 +1,5 @@
+#ScanFrame.py
+
 import pickle
 import ScanGenerator
 import AfLib
@@ -8,9 +10,11 @@ if __name__ == "__main__":
 
     if res:
         header = res.get_actions()[0][1:-1] if len(res.get_actions())>0 else ""
+        trailer = res.get_actions()[1][1:-1] if len(res.get_actions())>1 else ""
         
         # Definir el contenido del nuevo archivo Python Scan.py
-        contenido = f"""# Este es un archivo Python generado automaticamente
+        contenido = f"""#Scan.py
+# Este es un archivo Python generado automaticamente
 import pickle
 {header}
             
@@ -75,21 +79,22 @@ def tokensRecognize(afd,txtContent):
     first = 0
     while first<=len(txtContent):
         res = segmentRecognize(afd,first,txtContent)
-    
+        nextFirst = res[1]
+        
         if res[0]:
             print("ACEPTADO")
             print(res[2])
             resultado = genericFunction(res[3][1:-1])
             resultado = resultado if resultado!=None else ""
             print(resultado)
+        elif not res[0] and first!=len(txtContent):
+            message = f"ERROR al reconocer archivo txt en caracter no. {{res[1]+1}}: "
+            nextFirst+=1
+            print(message+txtContent[first:nextFirst])
         else:
-            message = f"ERROR al reconocer archivo txt en caracter no. {{res[1]}}: "
-                
-            return False
+            nextFirst+=1
 
-        first = res[1]
-            
-    return True
+        first = nextFirst
 
 if __name__ == "__main__":
     #Lectura del objeto pkl
@@ -101,6 +106,7 @@ if __name__ == "__main__":
         txtContent = file.read()  # Leer todo el contenido del archivo
         
     tokensRecognize(afd,txtContent)
+    {trailer}
 """
 
 

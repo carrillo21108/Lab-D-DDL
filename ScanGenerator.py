@@ -1,3 +1,5 @@
+#ScanGenerator.py
+
 from graphviz import Digraph
 from YalexLib import YalexRecognizer
 import AfdLib

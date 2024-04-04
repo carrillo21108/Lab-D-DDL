@@ -170,16 +170,20 @@ class YalexRecognizer:
                 pass
             elif longer[0]==8: #tokens
                 pass
-            elif longer[0]==9: #char o string
+            elif longer[0]==9 or longer[0]==5: #char o string, id
+                if len(identifier)>0:
+                   self.rule_tokens[identifier.pop()] = ""
+                   
                 identifier.append(longer[2])
             elif longer[0]==10: #|
                 pass
-            elif longer[0]==11: #{return SOMETHING}
-                self.rule_tokens[identifier.pop()] = longer[2]
+            elif longer[0]==11: #action
+                if len(identifier)>0:
+                    self.rule_tokens[identifier.pop()] = longer[2]
+                else:
+                    self.actions.append(longer[2])
             elif longer[0]==3: #ws
                 pass
-            elif longer[0]==5: #id
-                identifier.append(longer[2])
             elif longer[0]==6: #eq
                 pass
             elif longer[0]==0: #Comentario
@@ -282,7 +286,7 @@ class YalexRecognizer:
             elif longer[0]==11: #action
                 self.actions.append(longer[2])
             elif longer[0]==-1 and first!=len(yalexContent): #Error
-                message = f"ERROR al reconocer archivo Yalex en caracter no. {longer_error}: "
+                message = f"ERROR al reconocer archivo Yalex en caracter no. {longer_error+1}: "
                 posicion = ' '*len(message)
                 for item in yalexContent[first:longer_error]:
                     if item=='\n':

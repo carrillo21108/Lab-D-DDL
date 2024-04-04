@@ -1,7 +1,11 @@
+#Scan.py
 # Este es un archivo Python generado automaticamente
+import pickle
 PLUS = "PLUS"
 TIMES = "TIMES"
-import pickle 
+ID = "ID"
+LPAREN = "LPAREN"
+RPAREN = "RPAREN"
             
 def step_simulate_AFD(afd,c,lookAhead):
     res = afd.step_simulation(c, lookAhead)
@@ -64,21 +68,22 @@ def tokensRecognize(afd,txtContent):
     first = 0
     while first<=len(txtContent):
         res = segmentRecognize(afd,first,txtContent)
-    
+        nextFirst = res[1]
+        
         if res[0]:
             print("ACEPTADO")
             print(res[2])
             resultado = genericFunction(res[3][1:-1])
             resultado = resultado if resultado!=None else ""
             print(resultado)
+        elif not res[0] and first!=len(txtContent):
+            message = f"ERROR al reconocer archivo txt en caracter no. {res[1]+1}: "
+            nextFirst+=1
+            print(message+txtContent[first:nextFirst])
         else:
-            message = f"ERROR al reconocer archivo txt en caracter no. {res[1]}: "
-                
-            return False
+            nextFirst+=1
 
-        first = res[1]
-            
-    return True
+        first = nextFirst
 
 if __name__ == "__main__":
     #Lectura del objeto pkl
@@ -90,3 +95,4 @@ if __name__ == "__main__":
         txtContent = file.read()  # Leer todo el contenido del archivo
         
     tokensRecognize(afd,txtContent)
+    print("Finalizacion")

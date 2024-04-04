@@ -13,9 +13,11 @@ let digit = ['0'-'9']
 let id = letter(letter|digit)*
 
 rule tokens = 
-    ws
+    ws	      {print("WHISTESPACE")}
   | id        { return ID }               (* Cambie por una acción válida, que devuelva el token *)
   | '+'       { return PLUS }
   | '*'       { return TIMES }
   | '('       { return LPAREN }
   | ')'       { return RPAREN }
+
+{print("Finalizacion")}
