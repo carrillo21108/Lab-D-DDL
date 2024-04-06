@@ -342,8 +342,6 @@ def formatRegEx(tokens):
         for c in caracteres_ascii:
             if c in reserved:
                 characters.append('\\'+c)
-            elif c=='\\':
-                characters.append(str(ord(c)))
             else:
                 characters.append(c)
             characters.append('|')

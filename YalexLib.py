@@ -8,7 +8,7 @@ class YalexRecognizer:
     letter = "'A'-'Z''a'-'z'"
     digit = "'0'-'9'"
     #Mejorable al considerar todos los caracteres ASCII
-    especial_chars = "\",_+-.?|/:;=<>#^\""
+    especial_chars = "\",_+-.?!$~`|/:;=<>#^@\\\""
     parens = "\"()\""
     brackets = "\"\[\]\""
     curly_brackets = "\"{}\""

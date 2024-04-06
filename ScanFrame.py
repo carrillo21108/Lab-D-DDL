@@ -6,7 +6,7 @@ import AfLib
 
 if __name__ == "__main__":
 
-    res = ScanGenerator.generateLexer('slr-6.yal')
+    res = ScanGenerator.generateLexer('YALex3.txt')
 
     if res:
         header = res.get_actions()[0][1:-1] if len(res.get_actions())>0 else ""
@@ -112,7 +112,7 @@ with open('afd.pkl', 'rb') as archivo_entrada:
     afd = pickle.load(archivo_entrada)
             
 #Lectura del documento txt
-with open('texto.txt', 'r', encoding='utf-8') as file:
+with open('entrada3.txt', 'r', encoding='utf-8') as file:
     txtContent = file.read()  # Leer todo el contenido del archivo
         
 tokensRecognize(afd,txtContent)
