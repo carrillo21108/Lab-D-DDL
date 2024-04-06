@@ -1,11 +1,7 @@
 #Scan.py
 # Este es un archivo Python generado automaticamente
 import pickle
-PLUS = "PLUS"
-TIMES = "TIMES"
-ID = "ID"
-LPAREN = "LPAREN"
-RPAREN = "RPAREN"
+#Brian Carrillo
             
 def step_simulate_AFD(afd,c,lookAhead):
     res = afd.step_simulation(c, lookAhead)
@@ -105,5 +101,4 @@ with open('texto.txt', 'r', encoding='utf-8') as file:
     txtContent = file.read()  # Leer todo el contenido del archivo
         
 tokensRecognize(afd,txtContent)
-print("Finalizacion")
-print("Hola mundo")
+#Brian Carrillo

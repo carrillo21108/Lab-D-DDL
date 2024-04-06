@@ -54,7 +54,7 @@ def ast_to_afdd(alphabet,ast_root):
     afd.start = states[0]
     
     for elemento in afd.start.subset:
-        if elemento in Node.posTable['#']:
+        if elemento in Node.posTable['■']:
             afd.accept.add(states[0])
             states[0].is_accept = True
             #Persistencia del Pos de #
@@ -95,7 +95,7 @@ def ast_to_afdd(alphabet,ast_root):
                 newState = AFDState(afd,subset)
                 
                 for elemento in subset:
-                    if elemento in Node.posTable['#']:
+                    if elemento in Node.posTable['■']:
                         afd.accept.add(newState)
                         newState.is_accept = True
                         #Persistencia del Pos de #

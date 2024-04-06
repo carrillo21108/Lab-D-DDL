@@ -1,6 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-
-#YalexLib.py
+Ôªø#YalexLib.py
 
 import AfdLib
 
@@ -10,7 +8,7 @@ class YalexRecognizer:
     letter = "'A'-'Z''a'-'z'"
     digit = "'0'-'9'"
     #Mejorable al considerar todos los caracteres ASCII
-    especial_chars = "\",_+-.?|/:;=<>\""
+    especial_chars = "\",_+-.?|/:;=<>#^\""
     parens = "\"()\""
     brackets = "\"\[\]\""
     curly_brackets = "\"{}\""
@@ -23,7 +21,7 @@ class YalexRecognizer:
     blank_space = "\"\s\""
     
     ws = f"[{delim_regex}]+"
-    allLetter = f"{letter}\"¡…Õ”⁄\"\"·ÈÌÛ˙\""
+    allLetter = f"{letter}\"√Å√â√ç√ì√ö\"\"√°√©√≠√≥√∫\""
     _id = f"[{letter}]([{letter}]|[{digit}])*"
     
     let = "let"
@@ -59,7 +57,7 @@ class YalexRecognizer:
             ]               
         self.afds = []
         for item in regex:
-            self.afds.append(AfdLib.createAFD(item+'#'))
+            self.afds.append(AfdLib.createAFD(item+'‚ñ†'))
             
         self.comments = []
         self.definitions = {}
@@ -83,10 +81,10 @@ class YalexRecognizer:
         first = i
         # Bucle hasta que se alcance el final del contenido
         while i <= len(content):  # Asegura que haya espacio para lookAhead
-            char = content[i] if i<len(content) else ""  # Car·cter actual
-            lookAhead = content[i + 1] if i<len(content)-1 else ""  # Car·cter siguiente
+            char = content[i] if i<len(content) else ""  # Car√°cter actual
+            lookAhead = content[i + 1] if i<len(content)-1 else ""  # Car√°cter siguiente
         
-            # Procesa el car·cter aquÌ
+            # Procesa el car√°cter aqu√≠
             res =self.step_simulate_AFD(afd_pos, char, lookAhead)
             if res == 0:
                 last = i+1
@@ -98,10 +96,10 @@ class YalexRecognizer:
                 else:
                     return (False,i,"")
 
-            i += 1  # Incrementa la posiciÛn para el prÛximo car·cter
+            i += 1  # Incrementa la posici√≥n para el pr√≥ximo car√°cter
         
     def definitionRecognize(self,content):
-        # Inicializa la posiciÛn
+        # Inicializa la posici√≥n
         #print(content)
         definition = []
         first = 0
@@ -143,7 +141,7 @@ class YalexRecognizer:
         self.definitions[definition[0]] = definition[1]
     
     def ruleRecognize(self,content):
-        # Inicializa la posiciÛn
+        # Inicializa la posici√≥n
         #print(content)
         identifier = []
         first = 0
@@ -200,7 +198,7 @@ class YalexRecognizer:
             self.rule_tokens[item] = ""
 
     def valueRecognize(self,new_afdPos,content):
-        # Inicializa la posiciÛn
+        # Inicializa la posici√≥n
         # print(content)
         new_content = ""
         first = 0
@@ -251,7 +249,7 @@ class YalexRecognizer:
         return new_content
     
     def yalexRecognize(self,yalexContent):
-        # Inicializa la posiciÛn
+        # Inicializa la posici√≥n
         first = 0
         while first<=len(yalexContent):
             #Longer sera utilizado para encontrar la primera aceptacion encontrada mas larga

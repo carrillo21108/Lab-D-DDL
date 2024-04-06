@@ -1,4 +1,4 @@
-#ScanGenerator.py
+﻿#ScanGenerator.py
 
 from graphviz import Digraph
 from YalexLib import YalexRecognizer
@@ -21,14 +21,14 @@ def generateLexer(file_path):
         yalexContent = file.read()  # Leer todo el contenido del archivo
     
     if yalexRecognizer.yalexRecognize(yalexContent):
-        print(yalexRecognizer.get_comments())
-        print('\n')
-        print(yalexRecognizer.get_definitions())
-        print('\n')
-        print(yalexRecognizer.get_rule_tokens())
-        print('\n')
-        print(yalexRecognizer.get_actions())
-        print('\n')
+        # print(yalexRecognizer.get_comments())
+        # print('\n')
+        # print(yalexRecognizer.get_definitions())
+        # print('\n')
+        # print(yalexRecognizer.get_rule_tokens())
+        # print('\n')
+        # print(yalexRecognizer.get_actions())
+        # print('\n')
     
 
         for key in yalexRecognizer.get_rule_tokens():
@@ -41,7 +41,7 @@ def generateLexer(file_path):
         new_afdPos = [9] #Reconociendo chars y strings
         i=11
         for item in definitions_id:
-            yalexRecognizer.afds.append(AfdLib.createAFD(item+'#'))
+            yalexRecognizer.afds.append(AfdLib.createAFD(item+'■'))
             i+=1
             new_afdPos.append(i)
 
@@ -51,7 +51,7 @@ def generateLexer(file_path):
         # print('\n')
         #Reemplazando las variables de las definiciones en el regex de tokens
         while i<len(tokens_regex):
-            tokens_regex[i] = yalexRecognizer.valueRecognize(new_afdPos,tokens_regex[i])+'#'
+            tokens_regex[i] = yalexRecognizer.valueRecognize(new_afdPos,tokens_regex[i])+'■'
             i+=1
 
         # print(tokens_regex)
@@ -74,14 +74,14 @@ def generateLexer(file_path):
         lexer = '|'.join(tokens_regex)
         lexer = '('+lexer+')'
 
-        print(lexer)
-        print('\n')
+        # print(lexer)
+        # print('\n')
             
         #Construccion AFD
         afd = AfdLib.createLexerAFD(lexer,yalexRecognizer.get_rule_tokens())
-        afd_graph = AfLib.plot_af(afd.start)
-        nombre_archivo_pdf = 'AFD'
-        afd_graph.view(filename=nombre_archivo_pdf,cleanup=True)
+        # afd_graph = AfLib.plot_af(afd.start)
+        # nombre_archivo_pdf = 'AFD'
+        # afd_graph.view(filename=nombre_archivo_pdf,cleanup=True)
 
         # #Construccion de postfix
         # postfix = regexLib.shunting_yard(lexer)

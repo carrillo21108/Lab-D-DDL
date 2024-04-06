@@ -6,7 +6,7 @@ import AfLib
 
 if __name__ == "__main__":
 
-    res = ScanGenerator.generateLexer('slr-1.yal')
+    res = ScanGenerator.generateLexer('slr-6.yal')
 
     if res:
         header = res.get_actions()[0][1:-1] if len(res.get_actions())>0 else ""

@@ -14,6 +14,7 @@ let id = letter(letter|digit)*
 
 rule tokens = 
     ws	      {print("WHISTESPACE")}
+  | "if"       { return "HOLA" }
   | id        { return ID }               (* Cambie por una acción válida, que devuelva el token *)
   | '+'       { return PLUS }
   | '*'       { return TIMES }
